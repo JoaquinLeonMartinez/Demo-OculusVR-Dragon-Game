@@ -8,6 +8,7 @@ public class DragonController : MonoBehaviour
     InputDevice rightController;
     InputDevice leftController;
 
+    [SerializeField] Transform sourceTransform;
 
     void Start()
     {
@@ -45,6 +46,7 @@ public class DragonController : MonoBehaviour
         if (rightController.TryGetFeatureValue(CommonUsages.trigger, out float rightTriggerValue) && rightTriggerValue > 0.1)
         {
             Debug.Log($"Se esta pulsando el trigger derecho, value: {rightTriggerValue}");
+            ThrowFireAttack();
         }
 
         
@@ -69,5 +71,20 @@ public class DragonController : MonoBehaviour
             Debug.Log("Se esta pulsando el joystick izquierdo");
         }
 
+    }
+
+    public void ThrowFireAttack()
+    {
+        //sourceTransform
+
+        RaycastHit hit;
+
+        if (Physics.Raycast(sourceTransform.position, sourceTransform.forward, out hit))
+        {
+            if (hit.collider.CompareTag("Enemy"))
+            {
+                Destroy(hit.collider.gameObject);
+            }
+        }
     }
 }
