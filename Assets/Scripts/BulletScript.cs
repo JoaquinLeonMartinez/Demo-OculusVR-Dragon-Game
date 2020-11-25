@@ -9,7 +9,7 @@ public class BulletScript : MonoBehaviour
     void Start()
     {
         lifetime = 10f;
-        speed = 100f;
+        speed = 200f;
         this.GetComponent<Rigidbody>().AddForce(this.transform.forward * speed);
     }
 

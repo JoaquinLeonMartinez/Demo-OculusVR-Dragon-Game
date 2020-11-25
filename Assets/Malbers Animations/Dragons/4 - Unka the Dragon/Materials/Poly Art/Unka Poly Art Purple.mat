@@ -110,3 +110,4 @@ Material:
     - _Color9: {r: 0.21568629, g: 0.07450981, b: 0.38823533, a: 0.353}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _GradientColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

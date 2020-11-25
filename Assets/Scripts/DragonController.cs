@@ -87,7 +87,7 @@ public class DragonController : MonoBehaviour
     {
         //sourceTransform
 
-        /*
+        
         RaycastHit hit;
 
         if (Physics.Raycast(sourceTransform.position, sourceTransform.forward, out hit))
@@ -98,15 +98,15 @@ public class DragonController : MonoBehaviour
 
             }
         }
-        */
+        /*
         if (timer <= 0)
         {
-            var aux = Instantiate(bullet, sourceTransform.position, Quaternion.identity);
-            aux.transform.forward = sourceTransform.forward;
+            var aux = Instantiate(bullet, sourceTransform.position, sourceTransform.rotation);
+            //aux.transform.forward = sourceTransform.forward;
             //Debug.Log("Se ha instanciado una bala");
             timer = cooldownFire;
         }
-
+        */
     }
 
 }
