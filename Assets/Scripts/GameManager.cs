@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] GameObject dragon;
-   
+    [SerializeField] GameObject playerPoint;
+
     void Start()
     {
         
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
     public void SetPlayerOnDragon()
     {
         player.transform.parent = dragon.transform;
-        player.transform.position = new Vector3(dragon.transform.position.x, dragon.transform.position.y + 1f, dragon.transform.position.z);
+        player.transform.position = playerPoint.transform.position;
         player.transform.rotation = dragon.transform.rotation;
     }
 }

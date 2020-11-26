@@ -16,8 +16,11 @@ public class DragonController : MonoBehaviour
     [SerializeField] CinematicsManager cinematicsManager;
     [SerializeField] GameManager gameManager;
 
+    public bool isLanded;
+
     void Start()
     {
+        isLanded = false;
         cooldownFire = 0.5f;
         timer = 0;
         List<InputDevice> devices = new List<InputDevice>();
@@ -109,7 +112,12 @@ public class DragonController : MonoBehaviour
             else if (hit.collider.CompareTag("Dragon"))
             {
                 //Montarse en el dragon
-                gameManager.SetPlayerOnDragon();
+                if (isLanded)
+                {
+                    gameManager.SetPlayerOnDragon();
+                    isLanded = false;
+                }
+               
             }
         }
         /*
@@ -121,6 +129,11 @@ public class DragonController : MonoBehaviour
             timer = cooldownFire;
         }
         */
+    }
+
+    public void SetLanded(bool isLanded)
+    {
+        this.isLanded = isLanded;
     }
 
 }

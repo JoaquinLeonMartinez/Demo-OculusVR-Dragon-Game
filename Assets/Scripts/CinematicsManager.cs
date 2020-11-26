@@ -29,7 +29,10 @@ public class CinematicsManager : MonoBehaviour
     {
         foreach (GameObject enemy in enemies)
         {
-            enemy?.SetActive(true);
+            if (enemy != null)
+            {
+                enemy.SetActive(true);
+            }
         }
     }
 
@@ -51,6 +54,8 @@ public class CinematicsManager : MonoBehaviour
     public void TakeOffDragon()
     {
         dragon?.GetComponent<DragonFollower>().ChangePath(takeOffPath);
-        //TODO: Update animator
+        dragon?.GetComponent<Animator>().SetBool("RunAgain", true);
+        dragon?.GetComponent<Animator>().SetBool("IdleActive", false);
+        dragon?.GetComponent<Animator>().SetBool("StartGlide", false);
     }
 }
