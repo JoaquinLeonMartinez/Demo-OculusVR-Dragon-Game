@@ -5,8 +5,10 @@ using UnityEngine;
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] Transform sourceTransform;
-
     Transform selectedEnemy;
+    [SerializeField] GameManager gameManager;
+
+
     void Start()
     {
         
@@ -16,7 +18,7 @@ public class SelectionManager : MonoBehaviour
     {
         if (selectedEnemy != null)
         {
-            selectedEnemy.gameObject.GetComponent<SimpleEnemyBehaviour>().UnselectedEnemy();
+            selectedEnemy?.gameObject.GetComponent<SimpleEnemyBehaviour>().UnselectedEnemy();
         }
 
         ForwardRay();
@@ -33,6 +35,14 @@ public class SelectionManager : MonoBehaviour
                 selectedEnemy = hit.collider.gameObject.transform;
                 hit.collider.gameObject.GetComponent<SimpleEnemyBehaviour>().SelectedEnemy();
 
+            }
+            else if (hit.collider.CompareTag("Dragon"))
+            {
+                /*
+                selectedEnemy = hit.collider.gameObject.transform;
+                //Montarse en el dragon
+                gameManager.SetPlayerOnDragon();
+                */
             }
         }
     }

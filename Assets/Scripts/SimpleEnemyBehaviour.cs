@@ -77,7 +77,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
                         var col = child.gameObject.GetComponent<Renderer>().material.color;
                         col.a = opacity;
                         child.gameObject.GetComponent<Renderer>().material.color = col;
-                        Debug.Log($"opacity = {opacity} -- material alpha: {child.gameObject.GetComponent<Renderer>().material.color.a}");
+                        //Debug.Log($"opacity = {opacity} -- material alpha: {child.gameObject.GetComponent<Renderer>().material.color.a}");
                     }
                 }
 

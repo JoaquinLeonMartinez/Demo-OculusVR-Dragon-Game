@@ -13,6 +13,9 @@ public class DragonController : MonoBehaviour
     public float cooldownFire;
     float timer;
 
+    [SerializeField] CinematicsManager cinematicsManager;
+    [SerializeField] GameManager gameManager;
+
     void Start()
     {
         cooldownFire = 0.5f;
@@ -47,10 +50,13 @@ public class DragonController : MonoBehaviour
             timer -= Time.deltaTime;
         }
 
+
+
         //Right hand inputs
         if (rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool rightPrimaryButtonValue) && rightPrimaryButtonValue)
         {
             //Debug.Log("Se esta pulsando el boton principal del mando derecho");
+            cinematicsManager.InitDragon();
         }
 
         if (rightController.TryGetFeatureValue(CommonUsages.trigger, out float rightTriggerValue) && rightTriggerValue > 0.1)
@@ -69,11 +75,14 @@ public class DragonController : MonoBehaviour
         if (leftController.TryGetFeatureValue(CommonUsages.primaryButton, out bool leftPrimaryButtonValue) && leftPrimaryButtonValue)
         {
             //Debug.Log("Se esta pulsando el boton principal del mando izquierdo");
+            cinematicsManager.TakeOffDragon();
+            
         }
 
         if (leftController.TryGetFeatureValue(CommonUsages.trigger, out float leftTriggerValue) && leftTriggerValue > 0.1)
         {
             //Debug.Log($"Se esta pulsando el trigger izquierdo, value: {leftTriggerValue}");
+            cinematicsManager.SpawnEnemies();
         }
 
         if (leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 leftPrimaryAxisValue) && leftPrimaryAxisValue != Vector2.zero)
@@ -96,6 +105,11 @@ public class DragonController : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<SimpleEnemyBehaviour>().Dead();
 
+            }
+            else if (hit.collider.CompareTag("Dragon"))
+            {
+                //Montarse en el dragon
+                gameManager.SetPlayerOnDragon();
             }
         }
         /*
