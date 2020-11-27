@@ -9,6 +9,7 @@ public class DragonFollower : MonoBehaviour
     public EndOfPathInstruction endOfPathInstruction;
     public float speed = 5;
     public float distanceTravelled;
+    public bool isCamera = false;
     void Start()
     {
         
@@ -16,9 +17,16 @@ public class DragonFollower : MonoBehaviour
 
     void Update()
     {
-        distanceTravelled += speed * Time.deltaTime;
-        transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-        transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+        if (speed > 0 && distanceTravelled < pathCreator.path.length)
+        {
+            distanceTravelled += speed * Time.deltaTime;
+            transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+            if (!isCamera)
+            {
+                transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
+            }
+
+        }
     }
 
     public void ResetFollower()

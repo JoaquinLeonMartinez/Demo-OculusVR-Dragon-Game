@@ -12,6 +12,8 @@ public class DragonController : MonoBehaviour
     [SerializeField] GameObject bullet;
     public float cooldownFire;
     float timer;
+    bool readyToAttack;
+    public bool isOnDragon;
 
     [SerializeField] CinematicsManager cinematicsManager;
     [SerializeField] GameManager gameManager;
@@ -20,6 +22,8 @@ public class DragonController : MonoBehaviour
 
     void Start()
     {
+        isOnDragon = false;
+        readyToAttack = true;
         isLanded = false;
         cooldownFire = 0.5f;
         timer = 0;
@@ -48,9 +52,15 @@ public class DragonController : MonoBehaviour
     void Update()
     {
         //update timer
-        if (timer > 0)
+        if (timer > 0 && readyToAttack == false)
         {
+            gameManager.dragon.GetComponent<Animator>().SetBool("Attack", false);
             timer -= Time.deltaTime;
+        }
+        else if(readyToAttack == false)
+        {
+            readyToAttack = true;
+            timer = cooldownFire;
         }
 
 
@@ -59,13 +69,17 @@ public class DragonController : MonoBehaviour
         if (rightController.TryGetFeatureValue(CommonUsages.primaryButton, out bool rightPrimaryButtonValue) && rightPrimaryButtonValue)
         {
             //Debug.Log("Se esta pulsando el boton principal del mando derecho");
-            cinematicsManager.InitDragon();
+            //cinematicsManager.InitDragon();
         }
 
         if (rightController.TryGetFeatureValue(CommonUsages.trigger, out float rightTriggerValue) && rightTriggerValue > 0.1)
         {
             //Debug.Log($"Se esta pulsando el trigger derecho, value: {rightTriggerValue}");
-            ThrowFireAttack();
+            if (readyToAttack && isOnDragon)
+            {
+                ThrowFireAttack();
+            }
+            
         }
 
 
@@ -78,14 +92,14 @@ public class DragonController : MonoBehaviour
         if (leftController.TryGetFeatureValue(CommonUsages.primaryButton, out bool leftPrimaryButtonValue) && leftPrimaryButtonValue)
         {
             //Debug.Log("Se esta pulsando el boton principal del mando izquierdo");
-            cinematicsManager.TakeOffDragon();
+            //cinematicsManager.TakeOffDragon();
             
         }
 
         if (leftController.TryGetFeatureValue(CommonUsages.trigger, out float leftTriggerValue) && leftTriggerValue > 0.1)
         {
             //Debug.Log($"Se esta pulsando el trigger izquierdo, value: {leftTriggerValue}");
-            cinematicsManager.SpawnEnemies();
+            //cinematicsManager.SpawnEnemies();
         }
 
         if (leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 leftPrimaryAxisValue) && leftPrimaryAxisValue != Vector2.zero)
@@ -97,38 +111,22 @@ public class DragonController : MonoBehaviour
 
     public void ThrowFireAttack()
     {
-        //sourceTransform
-
         
+
+
         RaycastHit hit;
 
-        if (Physics.Raycast(sourceTransform.position, sourceTransform.forward, out hit))
+        if (Physics.Raycast(sourceTransform.position, sourceTransform.forward, out hit, LayerMask.GetMask("Enemies")))
         {
             if (hit.collider.CompareTag("Enemy"))
             {
+                readyToAttack = false; //solo hay cooldown cuando acierta en un enemigo
+                gameManager.dragon.GetComponent<Animator>().SetBool("Attack", true);
+                //dragon anim 
                 hit.collider.gameObject.GetComponent<SimpleEnemyBehaviour>().Dead();
 
             }
-            else if (hit.collider.CompareTag("Dragon"))
-            {
-                //Montarse en el dragon
-                if (isLanded)
-                {
-                    gameManager.SetPlayerOnDragon();
-                    isLanded = false;
-                }
-               
-            }
         }
-        /*
-        if (timer <= 0)
-        {
-            var aux = Instantiate(bullet, sourceTransform.position, sourceTransform.rotation);
-            //aux.transform.forward = sourceTransform.forward;
-            //Debug.Log("Se ha instanciado una bala");
-            timer = cooldownFire;
-        }
-        */
     }
 
     public void SetLanded(bool isLanded)

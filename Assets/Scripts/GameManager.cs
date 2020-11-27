@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject player;
-    [SerializeField] GameObject dragon;
+    public GameObject dragon;
     [SerializeField] GameObject playerPoint;
 
     void Start()
@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     public void SetPlayerOnDragon()
     {
         player.transform.parent = dragon.transform;
-        player.transform.position = playerPoint.transform.position;
-        player.transform.rotation = dragon.transform.rotation;
+
+        //player.transform.position = playerPoint.transform.position;
+        //player.transform.rotation = playerPoint.transform.rotation;
     }
 }

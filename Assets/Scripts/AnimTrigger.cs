@@ -13,6 +13,16 @@ public class AnimTrigger : MonoBehaviour
         {
             if (other.gameObject.GetComponent<Animator>() != null)
             {
+
+                if (dragonManager != null) //desactivamos todas las animacions
+                {
+                    other.gameObject.GetComponent<Animator>().SetBool("StartLanding", false);
+                    other.gameObject.GetComponent<Animator>().SetBool("IdleActive", false);
+                    other.gameObject.GetComponent<Animator>().SetBool("StartGlide", false);
+                    other.gameObject.GetComponent<Animator>().SetBool("TakeOff", false);
+                    other.gameObject.GetComponent<Animator>().SetBool("RunAgain", false);
+                }
+                //activamos la que queremos
                 other.gameObject.GetComponent<Animator>().SetBool(animation, true);
             }
 

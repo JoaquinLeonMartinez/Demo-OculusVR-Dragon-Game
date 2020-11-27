@@ -28,13 +28,18 @@ public class SelectionManager : MonoBehaviour
     {
         RaycastHit hit;
 
-        if (Physics.Raycast(sourceTransform.position, sourceTransform.forward, out hit))
+        if (Physics.Raycast(sourceTransform.position, sourceTransform.forward, out hit, LayerMask.GetMask("Enemies")))
         {
+            Debug.DrawRay(sourceTransform.position, sourceTransform.forward * 20, Color.red);
+            //Debug.DrawLine();
+
             if (hit.collider.CompareTag("Enemy"))
             {
-                selectedEnemy = hit.collider.gameObject.transform;
-                hit.collider.gameObject.GetComponent<SimpleEnemyBehaviour>().SelectedEnemy();
-
+                if (gameManager.GetComponent<DragonController>().isOnDragon)
+                {
+                    selectedEnemy = hit.collider.gameObject.transform;
+                    hit.collider.gameObject.GetComponent<SimpleEnemyBehaviour>().SelectedEnemy();
+                }
             }
             else if (hit.collider.CompareTag("Dragon"))
             {
