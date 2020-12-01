@@ -1595,6 +1595,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &581987034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 581987035}
+  m_Layer: 20
+  m_Name: MouthPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &581987035
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581987034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.009, y: 2.429, z: 2.965}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4966936986937609}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &602114348
 GameObject:
   m_ObjectHideFlags: 0
@@ -2562,6 +2592,7 @@ GameObject:
   - component: {fileID: 817328511}
   - component: {fileID: 817328512}
   - component: {fileID: 817328513}
+  - component: {fileID: 817328514}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2651,6 +2682,22 @@ MonoBehaviour:
   player: {fileID: 642805371}
   dragon: {fileID: 1328023169188331}
   playerPoint: {fileID: 1223985653}
+--- !u!114 &817328514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817328508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b64f4023bb716314a8d309d6dad3e71e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 581987034}
+  vfx:
+  - {fileID: 1434627103891488, guid: d2537137d10bc5148a1f514d0d6ec597, type: 3}
+  timerShoot: 1
 --- !u!1 &817754166
 GameObject:
   m_ObjectHideFlags: 0
@@ -4671,7 +4718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4368491947231596, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4368491947231596, guid: 52d340ed9c2714c4f8aabf1f82df1b58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9592,6 +9639,7 @@ Transform:
   - {fileID: 4120086115745661}
   - {fileID: 4472428468949137}
   - {fileID: 1223985654}
+  - {fileID: 581987035}
   m_Father: {fileID: 82041716}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 122.45, z: 0}

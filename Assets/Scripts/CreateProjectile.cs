@@ -20,18 +20,20 @@ public class CreateProjectile : MonoBehaviour
     
     void Update()
     {
+        /*
         if (timer <= 0)
         {
-            SpawnVFX();
+            SpawnVFX();//firePoint
             timer = timerShoot;
         }
         else
         {
             timer -= Time.deltaTime;
         }
+        */
     }
 
-    void SpawnVFX()
+    public void SpawnVFX()//GameObject firePoint
     {
         GameObject vfx;
         if (firePoint != null)

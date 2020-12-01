@@ -120,6 +120,7 @@ public class DragonController : MonoBehaviour
                 readyToAttack = false; //solo hay cooldown cuando acierta en un enemigo
                 gameManager.dragon.GetComponent<FrontEnemy>().FaceEnemy(hit.collider.transform);
                 gameManager.dragon.GetComponent<Animator>().SetBool("Attack", true);
+                gameManager.GetComponent<CreateProjectile>().SpawnVFX();
                 //dragon anim 
                 hit.collider.gameObject.GetComponent<SimpleEnemyBehaviour>().Dead();
 
