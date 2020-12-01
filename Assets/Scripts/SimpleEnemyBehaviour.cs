@@ -14,31 +14,34 @@ public class SimpleEnemyBehaviour : MonoBehaviour
     Animator anim;
     float attackTime;
     float damageTime;
-    float deathTime;
+    float deathTime = 0;
     float idleTime;
+
+    [SerializeField] Renderer renderSelectable;
 
     //public Shader shaderUnselected;
     //public Shader shaderSelected;
-    public Renderer rend;
+    //public Renderer rend;
 
     float opacity;
     bool isSelected;
 
     void Start()
     {
-
+        /*
         rend = this.GetComponent<Renderer>();
         if (rend == null)
         {
             Debug.LogError("No se ha encontrado el componente renderer hulio");
         }
+        */
         isSelected = false;
 
         //shaderUnselected = Shader.Find("Legacy Shaders/Diffuse");
         //shaderSelected = Shader.Find("Legacy Shaders/Self-Illumin/Diffuse");
 
         isAlive = true;
-        deathDelay = 5f;
+        deathDelay = 0.2f;
         anim = this.GetComponent<Animator>();
         if (anim != null)
         {
@@ -67,7 +70,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
         if (deathTimer > 0f)
         {
             deathTimer -= Time.deltaTime;
-            if (deathTimer <= deathDelay) //esto quiere decir que la animacion ha acabado y ya esta en el suelo
+            /*if (deathTimer <= deathDelay) //esto quiere decir que la animacion ha acabado y ya esta en el suelo
             {
                 opacity = deathTimer / deathDelay;
                 foreach (Transform child in this.transform)
@@ -82,7 +85,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
                 }
 
                  //Se desvanece poco a poco hasta que se destruye
-            }
+            }*/
         }
         else
         {
@@ -95,6 +98,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
     {
         isAlive = false;
         //play animation
+        Debug.Log("El enemigo ha muerto (en cuanto ocurra la animacion)");
         this.GetComponent<Animator>().SetBool("isDead", true);
     }
 
@@ -140,6 +144,14 @@ public class SimpleEnemyBehaviour : MonoBehaviour
                     isSelected = true;
                 }
             }
+
+            if (renderSelectable != null)
+            {
+                renderSelectable.material.color = Color.red;
+                isSelected = true;
+            }
+            
+
         }
     }
     public void UnselectedEnemy()
@@ -154,6 +166,12 @@ public class SimpleEnemyBehaviour : MonoBehaviour
                 isSelected = false;
                 //child.gameObject.GetComponent<Renderer>().material.color = Color.red;
             }
+            if (renderSelectable != null)
+            {
+                renderSelectable.material.color = Color.white;
+                isSelected = false;
+            }
+
         }
     }
 
