@@ -16,14 +16,16 @@ public class CinematicsManager : MonoBehaviour
 
     [SerializeField] GameObject cameraPlayer;
     [SerializeField] GameObject gameManager;
+    [SerializeField] GameObject takeOffTargetPoint;
 
     bool playerOnDragon = false;
     bool initedDragon = false;
     //bool allEnemiesDied = false;
-    float roarTimer = 5f;
+    float roarTimer = 3f;
     float initDragonOpacity = 0;
     float opacitySpeed = 2f;
     float enemiesStartTimer = 3f; //esto pasara a ser un bool de cuando hayan acabado los "insultos"
+
 
     void Start()
     {
@@ -54,7 +56,7 @@ public class CinematicsManager : MonoBehaviour
             if (roarTimer <= 0)
             {
                 playerOnDragon = true;
-                gameManager?.GetComponent<GameManager>().SetPlayerOnDragon();
+                //gameManager?.GetComponent<GameManager>().SetPlayerOnDragon();
                 cameraPlayer.GetComponent<DragonFollower>().speed = 2f;
             }
             else
@@ -103,6 +105,8 @@ public class CinematicsManager : MonoBehaviour
     //Despegar //Segunda Cinematica
     public void TakeOffDragon()
     {
+        dragon.GetComponent<FrontEnemy>().FaceEnemy(takeOffTargetPoint.transform);
+        gameManager?.GetComponent<GameManager>().SetPlayerOnDragon();
         dragon?.GetComponent<DragonFollower>().ChangePath(takeOffPath);
         gameManager.GetComponent<DragonController>().isLanded = false;
         dragon?.GetComponent<Animator>().SetBool("RunAgain", true);

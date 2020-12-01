@@ -111,9 +111,6 @@ public class DragonController : MonoBehaviour
 
     public void ThrowFireAttack()
     {
-        
-
-
         RaycastHit hit;
 
         if (Physics.Raycast(sourceTransform.position, sourceTransform.forward, out hit, LayerMask.GetMask("Enemies")))
@@ -121,6 +118,7 @@ public class DragonController : MonoBehaviour
             if (hit.collider.CompareTag("Enemy"))
             {
                 readyToAttack = false; //solo hay cooldown cuando acierta en un enemigo
+                gameManager.dragon.GetComponent<FrontEnemy>().FaceEnemy(hit.collider.transform);
                 gameManager.dragon.GetComponent<Animator>().SetBool("Attack", true);
                 //dragon anim 
                 hit.collider.gameObject.GetComponent<SimpleEnemyBehaviour>().Dead();

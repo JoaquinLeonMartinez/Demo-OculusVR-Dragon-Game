@@ -31,7 +31,7 @@ public class SelectionManager : MonoBehaviour
         if (Physics.Raycast(sourceTransform.position, sourceTransform.forward, out hit, LayerMask.GetMask("Enemies")))
         {
             Debug.DrawRay(sourceTransform.position, sourceTransform.forward * 20, Color.red);
-            //Debug.DrawLine();
+            //Debug.Log($"Ha chocado con algo: {hit.collider.tag}");
 
             if (hit.collider.CompareTag("Enemy"))
             {
