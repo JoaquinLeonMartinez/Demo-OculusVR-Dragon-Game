@@ -408,6 +408,9 @@ AnimatorStateMachine:
   - serializedVersion: 1
     m_State: {fileID: 1102741969072986028}
     m_Position: {x: 132, y: 48, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3866637660849114740}
+    m_Position: {x: 110, y: -140, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -417,4 +420,30 @@ AnimatorStateMachine:
   m_EntryPosition: {x: -72, y: 84, z: 0}
   m_ExitPosition: {x: 948, y: 156, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 1102778227781795332}
+  m_DefaultState: {fileID: 3866637660849114740}
+--- !u!1102 &3866637660849114740
+AnimatorState:
+  serializedVersion: 5
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FlyFWD 0
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 2a25bb52f87af654db281f0441388493, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 

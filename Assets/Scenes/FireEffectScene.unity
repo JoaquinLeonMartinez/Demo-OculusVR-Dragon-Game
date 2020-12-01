@@ -567,4 +567,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 938888320}
   vfx:
-  - {fileID: 594106534178714472, guid: 5b57229c4a242a642991d772fb10dfbf, type: 3}
+  - {fileID: 1434627103891488, guid: d2537137d10bc5148a1f514d0d6ec597, type: 3}
+  timerShoot: 1
