@@ -41,7 +41,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
         //shaderSelected = Shader.Find("Legacy Shaders/Self-Illumin/Diffuse");
 
         isAlive = true;
-        deathDelay = 0.2f;
+        deathDelay = 0.01f;
         anim = this.GetComponent<Animator>();
         if (anim != null)
         {
@@ -89,6 +89,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
         }
         else
         {
+
             Destroy(gameObject);
         }
         

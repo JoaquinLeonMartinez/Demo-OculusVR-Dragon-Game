@@ -14455,10 +14455,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4370a45a4b41add499427e68cf384884, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  speed: 2
   fireRate: 2
   nuzzlePrefab: {fileID: 594106534178714472, guid: 45d50703b5654e04f88c303c7e7e82bd, type: 3}
-  hitPrefab: {fileID: 0}
+  hitPrefab: {fileID: 594106534178714472, guid: dfc1788b4b32f354bb57e85845b97c2b, type: 3}
 --- !u!135 &8000712065603423745
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -36,6 +36,11 @@ public class ProjectileMove : MonoBehaviour
         {
             Debug.Log("No speed");
         }
+
+        if (interpolation >= 1f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public void SetTargetPos(Vector3 targetPos, Vector3 originalPos)
@@ -49,6 +54,17 @@ public class ProjectileMove : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             collision.gameObject.GetComponent<SimpleEnemyBehaviour>().Dead();
+
+            ContactPoint contact = collision.contacts[0];
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+            Vector3 pos = contact.point;
+
+            if (hitPrefab != null)
+            {
+                var hitVFX = Instantiate(hitPrefab, pos, rot);
+            }
+
+            Debug.Log("Se destruye el proyectil");
             Destroy(this.gameObject);
         }
        

@@ -25,11 +25,11 @@ public class CinematicsManager : MonoBehaviour
     float initDragonOpacity = 0;
     float opacitySpeed = 2f;
     float enemiesStartTimer = 3f; //esto pasara a ser un bool de cuando hayan acabado los "insultos"
-
-
+    public float takeOffDelay = 3f;
+    float takeOffTimer;
     void Start()
     {
-
+        takeOffTimer = takeOffDelay;
     }
 
 
@@ -67,7 +67,17 @@ public class CinematicsManager : MonoBehaviour
 
         if (enemiesParent.transform.childCount == 0 && gameManager.GetComponent<DragonController>().isLanded == true) //si han muerto todos los enemigos
         {
-            TakeOffDragon();
+            //Delay here
+            if (takeOffTimer <= 0)
+            {
+                TakeOffDragon();
+                takeOffTimer = takeOffDelay;
+            }
+            else
+            {
+                takeOffTimer -= Time.deltaTime;
+            }
+            
         }
 
     }

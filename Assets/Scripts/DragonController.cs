@@ -25,7 +25,7 @@ public class DragonController : MonoBehaviour
         isOnDragon = false;
         readyToAttack = true;
         isLanded = false;
-        cooldownFire = 0.5f;
+        cooldownFire = 3f;
         timer = 0;
         List<InputDevice> devices = new List<InputDevice>();
         InputDeviceCharacteristics desiredDevide = InputDeviceCharacteristics.Right | InputDeviceCharacteristics.Controller;
