@@ -1182,7 +1182,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 50
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -3033,12 +3033,15 @@ MonoBehaviour:
     _bezierPath:
       points:
       - {x: -30.14038, y: -1.520977, z: 2.3798218}
-      - {x: -270.21497, y: -0.3595295, z: -103.322754}
-      - {x: -28.168701, y: 165.6668, z: -157.9361}
-      - {x: 22.16507, y: 151.91556, z: -159.1318}
-      - {x: 339.8688, y: 65.11859, z: -166.67905}
-      - {x: 307.0538, y: 193.54234, z: -198.78113}
-      - {x: -10.428284, y: 146.48691, z: 57.33972}
+      - {x: -258.3573, y: -0.32328987, z: -114.49097}
+      - {x: -311.73782, y: 76.37557, z: -44.7598}
+      - {x: -322.25598, y: 86.97308, z: -32.645386}
+      - {x: -332.7748, y: 97.57128, z: -20.53019}
+      - {x: -364.67834, y: 116.89429, z: -15.50769}
+      - {x: -370.00443, y: 115.40518, z: -13.396851}
+      - {x: -370.00443, y: 115.40518, z: -13.396851}
+      - {x: -617.49744, y: 115.41197, z: -13.347626}
+      - {x: -617.928, y: 115.408585, z: -13.096161}
       isClosed: 0
       space: 0
       controlMode: 0
@@ -3051,9 +3054,10 @@ MonoBehaviour:
       - 0
       - 0
       - 0
-      globalNormalsAngle: 90
+      - 0
+      globalNormalsAngle: 6
       flipNormals: 0
-    vertexPathUpToDate: 1
+    vertexPathUpToDate: 0
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -3062,13 +3066,13 @@ MonoBehaviour:
     displayAnchorPoints: 1
     displayControlPoints: 1
     bezierHandleScale: 1
-    globalDisplaySettingsFoldout: 0
+    globalDisplaySettingsFoldout: 1
     keepConstantHandleSize: 0
     showNormalsInVertexMode: 0
     showBezierPathInVertexMode: 0
-    showDisplayOptions: 0
+    showDisplayOptions: 1
     showPathOptions: 1
-    showVertexPathDisplayOptions: 0
+    showVertexPathDisplayOptions: 1
     showVertexPathOptions: 1
     showNormals: 1
     showNormalsHelpInfo: 0
@@ -4330,13 +4334,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1480252383}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.67524266, y: -0.2575623, z: 0.025472885, w: 0.69069546}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 71.066, y: -97.897, z: -74.484}
 --- !u!1 &1521806929
 GameObject:
   m_ObjectHideFlags: 0
@@ -5174,7 +5178,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888185466}
   m_LocalRotation: {x: -0, y: 0.98536444, z: -0, w: 0.17046066}
-  m_LocalPosition: {x: -46.66, y: 0.92, z: -12.38}
+  m_LocalPosition: {x: -62.18, y: 0.92, z: -18.2}
   m_LocalScale: {x: 2.5409644, y: 3.4119222, z: 6.3587546}
   m_Children: []
   m_Father: {fileID: 431816216}
