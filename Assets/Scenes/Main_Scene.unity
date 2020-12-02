@@ -2615,6 +2615,8 @@ MonoBehaviour:
   bullet: {fileID: 4765944130951391094, guid: 66af4442d63844647a9be89da26cbbb1, type: 3}
   cooldownFire: 0
   isOnDragon: 0
+  dragonMovementActive: 0
+  movementSpeed: 1
   cinematicsManager: {fileID: 817328512}
   gameManager: {fileID: 817328513}
   isLanded: 0
@@ -3057,7 +3059,7 @@ MonoBehaviour:
       - 0
       globalNormalsAngle: 6
       flipNormals: 0
-    vertexPathUpToDate: 0
+    vertexPathUpToDate: 1
     vertexPathMaxAngleError: 0.3
     vertexPathMinVertexSpacing: 0.01
     showTransformTool: 1
@@ -6743,7 +6745,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!54 &1328023169188332
 Rigidbody:
   m_ObjectHideFlags: 0

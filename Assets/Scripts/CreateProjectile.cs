@@ -35,7 +35,7 @@ public class CreateProjectile : MonoBehaviour
 
     public void SpawnVFX(Vector3 targetPos)//GameObject firePoint
     {
-        Debug.Log("Se crea el proyectil");
+        //Debug.Log("Se crea el proyectil");
         GameObject vfx;
         if (firePoint != null)
         {

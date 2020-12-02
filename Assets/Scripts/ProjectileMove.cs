@@ -64,7 +64,7 @@ public class ProjectileMove : MonoBehaviour
                 var hitVFX = Instantiate(hitPrefab, pos, rot);
             }
 
-            Debug.Log("Se destruye el proyectil");
+            //Debug.Log("Se destruye el proyectil");
             Destroy(this.gameObject);
         }
        

@@ -14,6 +14,8 @@ public class DragonController : MonoBehaviour
     float timer;
     bool readyToAttack;
     public bool isOnDragon;
+    public bool dragonMovementActive = false;
+    public float movementSpeed = 1f;
 
     [SerializeField] CinematicsManager cinematicsManager;
     [SerializeField] GameManager gameManager;
@@ -86,6 +88,13 @@ public class DragonController : MonoBehaviour
         if (rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 rightPrimaryAxisValue) && rightPrimaryAxisValue != Vector2.zero)
         {
             //Debug.Log("Se esta pulsando el joystick derecho");
+            Debug.Log($"Se esta pulsando el joystick derecho, posicion: x: {rightPrimaryAxisValue.x} y: {rightPrimaryAxisValue.y}");
+
+            if (rightPrimaryAxisValue.x != 0 && dragonMovementActive) //este bool se debe activar con un trigger
+            {
+                //Nos movemos hacia donde indique el joystick
+                gameManager.dragon.transform.position =new Vector3(gameManager.dragon.transform.position .x + rightPrimaryAxisValue.x * movementSpeed, gameManager.dragon.transform.position.y, gameManager.dragon.transform.position.z);
+            }
         }
 
         //Left hand inputs
@@ -104,7 +113,7 @@ public class DragonController : MonoBehaviour
 
         if (leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 leftPrimaryAxisValue) && leftPrimaryAxisValue != Vector2.zero)
         {
-            //Debug.Log("Se esta pulsando el joystick izquierdo");
+
         }
 
     }

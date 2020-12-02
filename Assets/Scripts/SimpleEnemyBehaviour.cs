@@ -125,7 +125,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
                     //Debug.Log($"Se ha asignado la duracion de la animacion de Idle, duracion = {idleTime}");
                     break;
                 default:
-                    Debug.Log($"No se ha encontrado nada para esta animacion = {clip.name}");
+                    //Debug.Log($"No se ha encontrado nada para esta animacion = {clip.name}");
                     break;
             }
         }
