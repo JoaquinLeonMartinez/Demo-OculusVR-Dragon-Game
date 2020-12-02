@@ -33,12 +33,13 @@ public class CreateProjectile : MonoBehaviour
         */
     }
 
-    public void SpawnVFX()//GameObject firePoint
+    public void SpawnVFX(Vector3 targetPos)//GameObject firePoint
     {
         GameObject vfx;
         if (firePoint != null)
         {
             vfx = Instantiate(effectToSpawn, firePoint.transform.position, Quaternion.identity);
+            vfx.GetComponent<ProjectileMove>().SetTargetPos(targetPos, firePoint.transform.position);
         }
         else
         {
