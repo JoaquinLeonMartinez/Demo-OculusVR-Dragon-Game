@@ -73,6 +73,12 @@ public class DragonController : MonoBehaviour
         {
             //Debug.Log("Se esta pulsando el boton principal del mando derecho");
             //cinematicsManager.InitDragon();
+            SoundManager.Instance.Play("Wings");
+        }
+
+        if (rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool rightSecondaryButtonValue) && rightSecondaryButtonValue)
+        {
+            SoundManager.Instance.Play("Steps");
         }
 
         if (rightController.TryGetFeatureValue(CommonUsages.trigger, out float rightTriggerValue) && rightTriggerValue > 0.1)
@@ -136,7 +142,7 @@ public class DragonController : MonoBehaviour
                 gameManager.dragon.GetComponent<FrontEnemy>().FaceEnemy(hit.collider.transform);
                 gameManager.dragon.GetComponent<Animator>().SetBool("Attack", true);
                 gameManager.dragon.GetComponent<CreateProjectile>().SpawnVFX(hit.transform.position);
-                //dragon anim 
+                SoundManager.Instance.Play("FireThrow");
                 //hit.collider.gameObject.GetComponent<SimpleEnemyBehaviour>().Dead(); //ahora esto se hace en la bala
             }
         }

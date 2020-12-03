@@ -32,6 +32,12 @@ public class AnimTrigger : MonoBehaviour
                 {
                     dragonManager.SetLanded(true);
                 }
+
+                //Significa que esta a punto de rugir y quedarse en idle
+                if (animation == "IdleActive")
+                {
+                    SoundManager.Instance.Play("Roar");
+                }
             }
 
 
