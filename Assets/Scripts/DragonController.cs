@@ -21,6 +21,7 @@ public class DragonController : MonoBehaviour
     [SerializeField] GameManager gameManager;
 
     public bool isLanded;
+    public bool isBattleEnded = false;
 
     void Start()
     {
@@ -88,12 +89,16 @@ public class DragonController : MonoBehaviour
         if (rightController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 rightPrimaryAxisValue) && rightPrimaryAxisValue != Vector2.zero)
         {
             //Debug.Log("Se esta pulsando el joystick derecho");
-            Debug.Log($"Se esta pulsando el joystick derecho, posicion: x: {rightPrimaryAxisValue.x} y: {rightPrimaryAxisValue.y}");
+            //Debug.Log($"Se esta pulsando el joystick derecho, posicion: x: {rightPrimaryAxisValue.x} y: {rightPrimaryAxisValue.y}");
 
             if (rightPrimaryAxisValue.x != 0 && dragonMovementActive) //este bool se debe activar con un trigger
             {
                 //Nos movemos hacia donde indique el joystick
-                gameManager.dragon.transform.position =new Vector3(gameManager.dragon.transform.position .x + rightPrimaryAxisValue.x * movementSpeed, gameManager.dragon.transform.position.y, gameManager.dragon.transform.position.z);
+                /*if (gameManager.dragon.transform.position.x <= 3f) //limitar la distancia al grafo
+                {
+                    gameManager.dragon.transform.position = new Vector3(gameManager.dragon.transform.position.x + rightPrimaryAxisValue.x * movementSpeed, gameManager.dragon.transform.position.y, gameManager.dragon.transform.position.z);
+                }*/
+                
             }
         }
 

@@ -10,9 +10,11 @@ public class DragonFollower : MonoBehaviour
     public float speed = 5;
     public float distanceTravelled;
     public bool isCamera = false;
+
+
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -21,11 +23,11 @@ public class DragonFollower : MonoBehaviour
         {
             distanceTravelled += speed * Time.deltaTime;
             transform.position = pathCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+            //transform.position = new Vector3(transform.position.x + thresholdMovement, transform.position.y, transform.position.z);
             if (!isCamera)
             {
                 transform.rotation = pathCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
             }
-
         }
     }
 

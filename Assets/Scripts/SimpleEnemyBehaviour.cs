@@ -100,7 +100,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
         isAlive = false;
         //play animation
         Debug.Log("El enemigo ha muerto (en cuanto ocurra la animacion)");
-        this.GetComponent<Animator>().SetBool("isDead", true);
+        //this.GetComponent<Animator>().SetBool("isDead", true);
     }
 
     public void UpdateAnimClipTimes()

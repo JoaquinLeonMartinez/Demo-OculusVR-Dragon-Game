@@ -29,15 +29,20 @@ public class FrontEnemy : MonoBehaviour
         }
         */
 
-        if ( target != null && !isFrontTarget) // we get sure the target is here
+        if ( target != null && !isFrontTarget && gameManager.GetComponent<DragonController>().isBattleEnded == false) // we get sure the target is here
         {
-            
+            Debug.Log("Giramos hacia el enemigo");
             var rotationAngle = Quaternion.LookRotation(target.position - transform.position); // we get the angle has to be rotated //target.position - transform.position
             transform.rotation = Quaternion.Slerp (transform.rotation, rotationAngle, Time.deltaTime * rotationSpeed); // we rotate the rotationAngle 
         }
-        else if (target == null && firstShoot && gameManager.GetComponent<DragonController>().isLanded == true)
+        else if (target == null && firstShoot && gameManager.GetComponent<DragonController>().isLanded == true && gameManager.GetComponent<DragonController>().isBattleEnded == false)
         {
+            Debug.Log("Volvemos a la posicion inicial");
             transform.rotation = Quaternion.Slerp(transform.rotation, originalRotation, Time.deltaTime * rotationSpeed);
+        }
+        else
+        {
+            Debug.Log("No estamos mirando a ningun enemigo");
         }
 
         //Debug.Log($"Dragon rotation: {transform.rotation}");

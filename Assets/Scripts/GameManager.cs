@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject player;
     public GameObject dragon;
+    public GameObject dragonParent;
     [SerializeField] GameObject playerPoint;
 
     void Start()

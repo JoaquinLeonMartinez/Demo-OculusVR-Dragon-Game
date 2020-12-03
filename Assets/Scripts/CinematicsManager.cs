@@ -8,7 +8,7 @@ public class CinematicsManager : MonoBehaviour
     [SerializeField] GameObject enemiesParent;
     //[SerializeField] List<GameObject> enemies;
 
-    [SerializeField] GameObject dragon;
+    //[SerializeField] GameObject dragon;
 
     [SerializeField] PathCreator landPath;
     [SerializeField] PathCreator runPath;
@@ -51,7 +51,7 @@ public class CinematicsManager : MonoBehaviour
         }
 
         //si ya ha llegado a su destino y esta en tierra --> activamos la transicion de la camara
-        if (!playerOnDragon && dragon?.GetComponent<DragonFollower>().distanceTravelled >= dragon?.GetComponent<DragonFollower>().pathCreator.path.length && gameManager?.GetComponent<DragonController>().isLanded == true) 
+        if (!playerOnDragon && gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().distanceTravelled >= gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().pathCreator.path.length && gameManager?.GetComponent<DragonController>().isLanded == true) 
         {
             if (roarTimer <= 0)
             {
@@ -98,9 +98,9 @@ public class CinematicsManager : MonoBehaviour
     public void InitDragon()
     {
         initedDragon = true;
-        dragon.SetActive(true);
-        dragon.GetComponent<DragonFollower>().speed = 5;
-        dragon?.GetComponent<DragonFollower>().ChangePath(landPath);
+        gameManager.GetComponent<GameManager>().dragonParent.SetActive(true);
+        gameManager.GetComponent<GameManager>().dragonParent.GetComponent<DragonFollower>().speed = 5;
+        gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().ChangePath(landPath);
 
         //TODO: Cuando aterrice se debe hacer la transicion de la camara
     }
@@ -108,21 +108,22 @@ public class CinematicsManager : MonoBehaviour
     //Correr, segunda parte de la primera cinematica
     public void RunDragon()
     {
-        dragon?.GetComponent<DragonFollower>().ChangePath(runPath);
+        gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().ChangePath(runPath);
         //dragon?.GetComponent<Animator>().SetBool("StartRun", true);
     }
 
     //Despegar //Segunda Cinematica
     public void TakeOffDragon()
     {
-        dragon.GetComponent<FrontEnemy>().FaceEnemy(takeOffTargetPoint.transform);
+        gameManager.GetComponent<DragonController>().isBattleEnded = true;
+        gameManager.GetComponent<GameManager>().dragon.GetComponent<FrontEnemy>().FaceEnemy(takeOffTargetPoint.transform);
         gameManager?.GetComponent<GameManager>().SetPlayerOnDragon();
-        dragon?.GetComponent<DragonFollower>().ChangePath(takeOffPath);
+        gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().ChangePath(takeOffPath);
         gameManager.GetComponent<DragonController>().isLanded = false;
-        dragon?.GetComponent<Animator>().SetBool("RunAgain", true);
-        dragon?.gameObject.GetComponent<Animator>().SetBool("StartLanding", false);
-        dragon?.gameObject.GetComponent<Animator>().SetBool("IdleActive", false);
-        dragon?.gameObject.GetComponent<Animator>().SetBool("StartGlide", false);
-        dragon?.gameObject.GetComponent<Animator>().SetBool("TakeOff", false);
+        gameManager.GetComponent<GameManager>().dragon?.GetComponent<Animator>().SetBool("RunAgain", true);
+        gameManager.GetComponent<GameManager>().dragon?.gameObject.GetComponent<Animator>().SetBool("StartLanding", false);
+        gameManager.GetComponent<GameManager>().dragon?.gameObject.GetComponent<Animator>().SetBool("IdleActive", false);
+        gameManager.GetComponent<GameManager>().dragon?.gameObject.GetComponent<Animator>().SetBool("StartGlide", false);
+        gameManager.GetComponent<GameManager>().dragon?.gameObject.GetComponent<Animator>().SetBool("TakeOff", false);
     }
 }
