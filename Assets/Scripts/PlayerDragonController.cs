@@ -8,8 +8,8 @@ public class PlayerDragonController : MonoBehaviour
 {
     InputDevice rightController;
     public bool isPlayerControllerActive = false;
-    public float playerSpeed = 0.001f;
-    float thresholdMovement = 6f;
+    public float playerSpeed;
+    float thresholdMovement = 10f;
 
     void Start()
     {
@@ -39,11 +39,11 @@ public class PlayerDragonController : MonoBehaviour
                 {
                     //Nos movemos hacia donde indique el joystick
 
-                    if ((transform.localPosition.x < thresholdMovement && rightPrimaryAxisValue.x > 0)) //derecha
+                    if ((transform.localPosition.x < thresholdMovement && rightPrimaryAxisValue.x > 0.1)) //derecha
                     {
                         transform.localPosition = new Vector3(transform.localPosition.x + rightPrimaryAxisValue.x * Time.deltaTime * playerSpeed, transform.localPosition.y, transform.localPosition.z);
                     }
-                    else if ((rightPrimaryAxisValue.x < 0 && transform.localPosition.x > -thresholdMovement)) //izq
+                    else if ((rightPrimaryAxisValue.x < -0.1 && transform.localPosition.x > -thresholdMovement)) //izq
                     {
                         transform.localPosition = new Vector3(transform.localPosition.x + rightPrimaryAxisValue.x * Time.deltaTime * playerSpeed, transform.localPosition.y, transform.localPosition.z);
                     }

@@ -101,7 +101,7 @@ public class CinematicsManager : MonoBehaviour
         gameManager.GetComponent<GameManager>().dragonParent.SetActive(true);
         gameManager.GetComponent<GameManager>().dragonParent.GetComponent<DragonFollower>().speed = 5;
         gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().ChangePath(landPath);
-        SoundManager.Instance.Play("Roar");
+        //SoundManager.Instance.Play("Roar");
         SoundManager.Instance.footSteps.isFlying = true;
 
         //TODO: Cuando aterrice se debe hacer la transicion de la camara

@@ -36,7 +36,7 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
-        //Play("Musica de fondo")
+        Play("Theme");
     }
 
     private void Update()
@@ -48,7 +48,10 @@ public class SoundManager : MonoBehaviour
     {
         foreach (Sound s in sounds)
         {
-            s.source.pitch = s.pitch * UnityEngine.Random.Range(0.5f, 1.5f);
+            if (s.name != "Theme")
+            {
+                s.source.pitch = s.pitch * UnityEngine.Random.Range(0.5f, 1.5f);
+            }
         }
     }
 
