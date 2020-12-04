@@ -9,6 +9,8 @@ public class SoundManager : MonoBehaviour
 
     public static SoundManager Instance;
 
+    public FootSteps footSteps;
+
     private void Awake()
     {
         if (Instance == null)

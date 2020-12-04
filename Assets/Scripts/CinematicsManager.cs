@@ -102,6 +102,7 @@ public class CinematicsManager : MonoBehaviour
         gameManager.GetComponent<GameManager>().dragonParent.GetComponent<DragonFollower>().speed = 5;
         gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().ChangePath(landPath);
         SoundManager.Instance.Play("Roar");
+        SoundManager.Instance.footSteps.isFlying = true;
 
         //TODO: Cuando aterrice se debe hacer la transicion de la camara
     }
@@ -122,6 +123,7 @@ public class CinematicsManager : MonoBehaviour
         gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().ChangePath(takeOffPath);
         gameManager.GetComponent<DragonController>().isLanded = false;
         gameManager.GetComponent<GameManager>().dragon?.GetComponent<Animator>().SetBool("RunAgain", true);
+        SoundManager.Instance.footSteps.isRunning = true;
         gameManager.GetComponent<GameManager>().dragon?.gameObject.GetComponent<Animator>().SetBool("StartLanding", false);
         gameManager.GetComponent<GameManager>().dragon?.gameObject.GetComponent<Animator>().SetBool("IdleActive", false);
         gameManager.GetComponent<GameManager>().dragon?.gameObject.GetComponent<Animator>().SetBool("StartGlide", false);

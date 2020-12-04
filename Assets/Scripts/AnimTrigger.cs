@@ -31,12 +31,25 @@ public class AnimTrigger : MonoBehaviour
                 if (animation == "StartLanding")
                 {
                     dragonManager.SetLanded(true);
+                    SoundManager.Instance.footSteps.isRunning = true;
                 }
-
-                //Significa que esta a punto de rugir y quedarse en idle
-                if (animation == "IdleActive")
+                else if (animation == "IdleActive")//Significa que esta a punto de rugir y quedarse en idle
                 {
+                    SoundManager.Instance.footSteps.isRunning = false;
                     SoundManager.Instance.Play("Roar");
+                }
+                else if (animation == "StartGlide")
+                {
+                    SoundManager.Instance.footSteps.isFlying = false;
+                }
+                else if (animation == "RunAgain")
+                {
+                    SoundManager.Instance.footSteps.isRunning = true;
+                }
+                else if (animation == "TakeOff")
+                {
+                    SoundManager.Instance.footSteps.isRunning = false;
+                    SoundManager.Instance.footSteps.isFlying = true;
                 }
             }
 
