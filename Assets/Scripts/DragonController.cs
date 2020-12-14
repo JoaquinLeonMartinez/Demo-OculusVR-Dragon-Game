@@ -120,6 +120,7 @@ public class DragonController : MonoBehaviour
         {
             //Debug.Log($"Se esta pulsando el trigger izquierdo, value: {leftTriggerValue}");
             //cinematicsManager.SpawnEnemies();
+            Application.Quit();
         }
 
         if (leftController.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 leftPrimaryAxisValue) && leftPrimaryAxisValue != Vector2.zero)
