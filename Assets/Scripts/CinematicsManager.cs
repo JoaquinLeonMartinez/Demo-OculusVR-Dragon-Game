@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
+public enum Explication { Explication_1, Explication_2, none};
 public class CinematicsManager : MonoBehaviour
 {
     [SerializeField] GameObject enemiesParent;
@@ -27,15 +28,24 @@ public class CinematicsManager : MonoBehaviour
     float enemiesStartTimer = 3f; //esto pasara a ser un bool de cuando hayan acabado los "insultos"
     public float takeOffDelay = 3f;
     float takeOffTimer;
+    Explication explication; //podriamos hacer de esto un entero o un enum para todas las explicaciones que vaya a haber
     void Start()
     {
         takeOffTimer = takeOffDelay;
+        explication = Explication.Explication_1;
+        enemiesStartTimer = SoundManager.Instance.GetLength("Explication_1") + 2f;
     }
 
 
     void Update()
     {
 
+        //Audio de Irene
+        PlayExplication();
+
+        //Audio de enemigos
+
+        //Al finalizar el audio de los enemigos comienza esto:
         if (enemiesStartTimer <= 0 && !initedDragon)
         {
             InitDragon();
@@ -128,5 +138,19 @@ public class CinematicsManager : MonoBehaviour
         gameManager.GetComponent<GameManager>().dragon?.gameObject.GetComponent<Animator>().SetBool("IdleActive", false);
         gameManager.GetComponent<GameManager>().dragon?.gameObject.GetComponent<Animator>().SetBool("StartGlide", false);
         gameManager.GetComponent<GameManager>().dragon?.gameObject.GetComponent<Animator>().SetBool("TakeOff", false);
+    }
+
+    public void PlayExplication()
+    {
+        if (explication == Explication.Explication_1)
+        {
+            explication = Explication.none;
+            SoundManager.Instance.Play("Explication_1");
+        }
+        else if (explication == Explication.Explication_2)
+        {
+            explication = Explication.none;
+            SoundManager.Instance.Play("Explication_2");
+        }
     }
 }

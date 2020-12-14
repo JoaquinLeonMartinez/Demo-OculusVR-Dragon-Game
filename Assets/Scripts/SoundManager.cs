@@ -48,7 +48,7 @@ public class SoundManager : MonoBehaviour
     {
         foreach (Sound s in sounds)
         {
-            if (s.name != "Theme")
+            if (s.name != "Theme" && s.name != "Explication_1"  && s.name != "Explication_2")
             {
                 s.source.pitch = s.pitch * UnityEngine.Random.Range(0.5f, 1.5f);
             }
@@ -69,6 +69,20 @@ public class SoundManager : MonoBehaviour
             return;
         }
         
+    }
+
+    public float GetLength(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        if (s != null)
+        {
+            return s.clip.length;
+        }
+        else
+        {
+            Debug.LogError($"No se ha encontrado el sonido {name}");
+            return 0f;
+        }
     }
 
     /*
