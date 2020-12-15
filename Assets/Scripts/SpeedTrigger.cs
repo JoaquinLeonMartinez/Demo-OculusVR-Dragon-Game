@@ -20,5 +20,6 @@ public class SpeedTrigger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         follower.SetDefaultSpeed();
+        Destroy(this.gameObject);
     }
 }

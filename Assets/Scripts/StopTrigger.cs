@@ -25,5 +25,6 @@ public class StopTrigger : MonoBehaviour
         {
             enableTrigger.SetActive(true);
         }
+        Destroy(this.gameObject);
     }
 }
