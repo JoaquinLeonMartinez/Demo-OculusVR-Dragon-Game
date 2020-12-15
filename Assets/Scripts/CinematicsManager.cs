@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-public enum Explication { Explication_1, Explication_2, none};
+public enum Explication { Explication_1, Explication_2, Explication_3, none};
 public class CinematicsManager : MonoBehaviour
 {
     [SerializeField] GameObject enemiesParent;
@@ -26,14 +26,22 @@ public class CinematicsManager : MonoBehaviour
     float initDragonOpacity = 0;
     float opacitySpeed = 2f;
     float enemiesStartTimer = 3f; //esto pasara a ser un bool de cuando hayan acabado los "insultos"
+    float endAppTimer;
+    float secondExplicationTimer;
+    bool isEnd;
+    bool secondExplicationEnd;
     public float takeOffDelay = 3f;
     float takeOffTimer;
-    Explication explication; //podriamos hacer de esto un entero o un enum para todas las explicaciones que vaya a haber
+    public Explication explication; //podriamos hacer de esto un entero o un enum para todas las explicaciones que vaya a haber
     void Start()
     {
+        isEnd = false;
+        secondExplicationEnd = false;
         takeOffTimer = takeOffDelay;
         explication = Explication.Explication_1;
-        enemiesStartTimer = SoundManager.Instance.GetLength("Explication_1") + 2f;
+        enemiesStartTimer = SoundManager.Instance.GetLength("Explication_1") + 0.2f;
+        endAppTimer = SoundManager.Instance.GetLength("Explication_3") + 1f;
+        secondExplicationTimer = SoundManager.Instance.GetLength("Explication_2") + 0.1f;
     }
 
 
@@ -77,17 +85,40 @@ public class CinematicsManager : MonoBehaviour
 
         if (enemiesParent.transform.childCount == 0 && gameManager.GetComponent<DragonController>().isLanded == true) //si han muerto todos los enemigos
         {
-            //Delay here
-            if (takeOffTimer <= 0)
+            if (!secondExplicationEnd)
             {
-                TakeOffDragon();
-                takeOffTimer = takeOffDelay;
+                explication = Explication.Explication_2;
+            }
+
+            if (secondExplicationTimer <= 0)
+            {
+                //Delay here
+                if (takeOffTimer <= 0)
+                {
+                    TakeOffDragon();
+                    takeOffTimer = takeOffDelay;
+                }
+                else
+                {
+                    takeOffTimer -= Time.deltaTime;
+                }
             }
             else
             {
-                takeOffTimer -= Time.deltaTime;
+                secondExplicationTimer -= Time.deltaTime;
             }
-            
+        }
+
+        if (isEnd)
+        {
+            if (endAppTimer <= 0)
+            {
+                Application.Quit(); //en un futuro podemos poner un menu o algo asi
+            }
+            else
+            {
+                endAppTimer -= Time.deltaTime;
+            }
         }
 
     }
@@ -151,6 +182,13 @@ public class CinematicsManager : MonoBehaviour
         {
             explication = Explication.none;
             SoundManager.Instance.Play("Explication_2");
+            secondExplicationEnd = true;
+        }
+        else if (explication == Explication.Explication_3)
+        {
+            explication = Explication.none;
+            SoundManager.Instance.Play("Explication_3");
+            isEnd = true;
         }
     }
 }

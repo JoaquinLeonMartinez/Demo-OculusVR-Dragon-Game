@@ -48,7 +48,7 @@ public class SoundManager : MonoBehaviour
     {
         foreach (Sound s in sounds)
         {
-            if (s.name != "Theme" && s.name != "Explication_1"  && s.name != "Explication_2")
+            if (s.name != "Theme" && s.name != "Explication_1"  && s.name != "Explication_2" && s.name != "Explication_3")
             {
                 s.source.pitch = s.pitch * UnityEngine.Random.Range(0.5f, 1.5f);
             }

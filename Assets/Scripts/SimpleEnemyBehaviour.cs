@@ -25,6 +25,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
 
     float opacity;
     bool isSelected;
+    float randomStartDelay;
 
     void Start()
     {
@@ -40,6 +41,8 @@ public class SimpleEnemyBehaviour : MonoBehaviour
         //shaderUnselected = Shader.Find("Legacy Shaders/Diffuse");
         //shaderSelected = Shader.Find("Legacy Shaders/Self-Illumin/Diffuse");
 
+        randomStartDelay = Random.Range(0, 2.5f);
+
         isAlive = true;
         deathDelay = 0.01f;
         anim = this.GetComponent<Animator>();
@@ -47,6 +50,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
         {
             UpdateAnimClipTimes();
             deathTimer = deathTime + deathDelay;
+            anim.Update(randomStartDelay);
         }
         else
         {
@@ -62,6 +66,7 @@ public class SimpleEnemyBehaviour : MonoBehaviour
         {
             OnDead();
         }
+
 
     }
 

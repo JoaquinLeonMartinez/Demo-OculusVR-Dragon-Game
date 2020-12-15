@@ -56,4 +56,14 @@ public class DragonFollower : MonoBehaviour
     {
         return pathCreator.path.length;
     }
+
+    public void SetSpeed(int speed)
+    {
+        this.speed = speed;
+    }
+
+    public void SetDefaultSpeed()
+    {
+        speed = 5;
+    }
 }
