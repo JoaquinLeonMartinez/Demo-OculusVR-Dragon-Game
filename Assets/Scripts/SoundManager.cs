@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
@@ -10,6 +11,8 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance;
 
     public FootSteps footSteps;
+
+    public List<AudioSource> enemiesAudio;
 
     private void Awake()
     {
@@ -42,6 +45,22 @@ public class SoundManager : MonoBehaviour
     private void Update()
     {
 
+    }
+
+    public float InvokeEnemiesAudios()
+    {
+        if (enemiesAudio != null)
+        {
+            int randomNumb = UnityEngine.Random.Range(0, enemiesAudio.Count);
+            if (enemiesAudio[randomNumb] != null)
+            {
+                enemiesAudio[randomNumb].Play();
+                float duration = enemiesAudio[randomNumb].clip.length;
+                enemiesAudio.RemoveAt(randomNumb); //asi no se repetiran audios
+                return duration;
+            }
+        }
+        return 0;
     }
 
     private void RandomizePitch()

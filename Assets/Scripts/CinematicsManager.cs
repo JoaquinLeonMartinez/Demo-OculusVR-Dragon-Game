@@ -29,7 +29,10 @@ public class CinematicsManager : MonoBehaviour
     float endAppTimer;
     float secondExplicationTimer;
     bool isEnd;
+    float firstExplicationTimer;
     bool secondExplicationEnd;
+    float enemyAudioDuration;
+    int numOfEnemiesTalking;
     public float takeOffDelay = 3f;
     float takeOffTimer;
     public Explication explication; //podriamos hacer de esto un entero o un enum para todas las explicaciones que vaya a haber
@@ -39,9 +42,10 @@ public class CinematicsManager : MonoBehaviour
         secondExplicationEnd = false;
         takeOffTimer = takeOffDelay;
         explication = Explication.Explication_1;
-        enemiesStartTimer = SoundManager.Instance.GetLength("Explication_1") + 0.2f;
+        firstExplicationTimer = SoundManager.Instance.GetLength("Explication_1") + 0.2f;
         endAppTimer = SoundManager.Instance.GetLength("Explication_3") + 1f;
         secondExplicationTimer = SoundManager.Instance.GetLength("Explication_2") + 0.1f;
+        numOfEnemiesTalking = 3;
     }
 
 
@@ -54,13 +58,30 @@ public class CinematicsManager : MonoBehaviour
         //Audio de enemigos
 
         //Al finalizar el audio de los enemigos comienza esto:
-        if (enemiesStartTimer <= 0 && !initedDragon)
+        if (firstExplicationTimer <= 0 && !initedDragon)
         {
-            InitDragon();
+            //Antes de iniciar el dragon, los enemigos deben decir su frase
+            if (numOfEnemiesTalking > 0 && enemyAudioDuration > 0)
+            {
+                if (enemyAudioDuration > 0)
+                {
+                    enemyAudioDuration -= Time.deltaTime;
+                }
+                else
+                {
+                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios();
+                    numOfEnemiesTalking--;
+                }
+            }
+            else if(enemyAudioDuration <= 0) //de esta forma se espera a que el ultimo acabe de hablar para aparecer
+            {
+                
+                InitDragon();
+            }
         }
         else
         {
-            enemiesStartTimer -= Time.deltaTime;
+            firstExplicationTimer -= Time.deltaTime;
         }
 
         if (cameraPlayer.GetComponent<DragonFollower>().distanceTravelled >= cameraPlayer.GetComponent<DragonFollower>().pathCreator.path.length && gameManager.GetComponent<DragonController>().isOnDragon ==false)

@@ -676,6 +676,13 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   footSteps: {fileID: 1328023169188339}
+  enemiesAudio:
+  - {fileID: 300686040}
+  - {fileID: 432845545}
+  - {fileID: 1623154715}
+  - {fileID: 699756778}
+  - {fileID: 441559574}
+  - {fileID: 265108743}
 --- !u!4 &192483633
 Transform:
   m_ObjectHideFlags: 0
@@ -992,12 +999,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7fca15f776534de44a5318cf9bcedb91, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
 --- !u!4 &244867739 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4392940604193730, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
   m_PrefabInstance: {fileID: 244867738}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &265108743 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+  m_PrefabInstance: {fileID: 1088665240}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &300686038
 PrefabInstance:
@@ -1054,11 +1070,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f926c35b2435ed34bac3a3f41a888ae1, type: 3}
+    - target: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+      propertyPath: MaxDistance
+      value: 500
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
 --- !u!4 &300686039 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4392940604193730, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+  m_PrefabInstance: {fileID: 300686038}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &300686040 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
   m_PrefabInstance: {fileID: 300686038}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &331852460
@@ -1293,6 +1326,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 90e868ff3da1f6c4f8a2f86f8c06c754, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
 --- !u!4 &338610267 stripped
@@ -1544,6 +1581,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: -16.81, z: 0}
+--- !u!82 &432845545 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+  m_PrefabInstance: {fileID: 338610266}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &441559574 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+  m_PrefabInstance: {fileID: 244867738}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &445361050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2573,6 +2620,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &699756778 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+  m_PrefabInstance: {fileID: 892471085}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &718034745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3446,6 +3498,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: f3be04e11c52c1a4894f5ef68a1db8db, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
 --- !u!4 &892471086 stripped
@@ -4024,6 +4080,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 41ef69abe43c759498ebf362891737c0, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
 --- !u!4 &1088665241 stripped
@@ -5989,6 +6049,11 @@ MonoBehaviour:
   m_ThrowAngularVelocityScale: 1
   m_GravityOnDetach: 0
   m_RetainTransformParent: 1
+--- !u!82 &1623154715 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+  m_PrefabInstance: {fileID: 2145375575}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1746459368
 GameObject:
   m_ObjectHideFlags: 0
@@ -7857,6 +7922,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a7a0d8c7e7415a2468c3b6a1cea4369a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
 --- !u!4 &2145375576 stripped
