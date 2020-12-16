@@ -12,7 +12,11 @@ public class SoundManager : MonoBehaviour
 
     public FootSteps footSteps;
 
-    public List<AudioSource> enemiesAudio;
+    //public List<AudioSource> enemiesAudioOld;
+
+    public List<AudioClip> enemiesAudio;
+
+    public AudioSource audioSource;
 
     private void Awake()
     {
@@ -46,7 +50,7 @@ public class SoundManager : MonoBehaviour
     {
 
     }
-
+    /*
     public float InvokeEnemiesAudios()
     {
         if (enemiesAudio != null)
@@ -62,12 +66,35 @@ public class SoundManager : MonoBehaviour
         }
         return 0;
     }
+    */
+    public float InvokeEnemiesAudios()
+    {
+        if (enemiesAudio != null)
+        {
+            int randomNumb = UnityEngine.Random.Range(0, enemiesAudio.Count);
+            if (enemiesAudio[randomNumb] != null)
+            {
+                //Debug.Log($"Vamos a reproducir el audio {enemiesAudio[randomNumb]}");
+                audioSource.clip = enemiesAudio[randomNumb];
+                audioSource.Play();
+                //Debug.Log($"Ya se esta reproduciendo el audio {audioSource.clip.name}");
+                float duration = audioSource.clip.length;
+                enemiesAudio.RemoveAt(randomNumb); //asi no se repetiran audios
+                return duration;
+            }
+        }
+        else
+        {
+            Debug.LogError("No se encuentra la lista de audios de los enemigos");
+        }
+        return 0;
+    }
 
     private void RandomizePitch()
     {
         foreach (Sound s in sounds)
         {
-            if (s.name != "Theme" && s.name != "Explication_1"  && s.name != "Explication_2" && s.name != "Explication_3")
+            if (s.name != "Theme" && s.name != "Explication_1"  && s.name != "Explication_2" && s.name != "Explication_3" && s.name != "Explication_1_second")
             {
                 s.source.pitch = s.pitch * UnityEngine.Random.Range(0.5f, 1.5f);
             }

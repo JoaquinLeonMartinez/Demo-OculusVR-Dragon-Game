@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
 
-public enum Explication { Explication_1, Explication_2, Explication_3, none};
+public enum Explication { Explication_1, Explication_2, Explication_3, Explication_4, none };
 public class CinematicsManager : MonoBehaviour
 {
     [SerializeField] GameObject enemiesParent;
@@ -29,10 +29,13 @@ public class CinematicsManager : MonoBehaviour
     float endAppTimer;
     float secondExplicationTimer;
     bool isEnd;
+    bool isSecondPartPlayed;
     float firstExplicationTimer;
+    float firstExplicationTimer2;
     bool secondExplicationEnd;
     float enemyAudioDuration;
-    int numOfEnemiesTalking;
+    int numOfEnemiesTalkingFirstRound;
+    int numOfEnemiesTalkingSecondRound;
     public float takeOffDelay = 3f;
     float takeOffTimer;
     public Explication explication; //podriamos hacer de esto un entero o un enum para todas las explicaciones que vaya a haber
@@ -40,12 +43,15 @@ public class CinematicsManager : MonoBehaviour
     {
         isEnd = false;
         secondExplicationEnd = false;
+        isSecondPartPlayed = false;
         takeOffTimer = takeOffDelay;
         explication = Explication.Explication_1;
         firstExplicationTimer = SoundManager.Instance.GetLength("Explication_1") + 0.2f;
+        firstExplicationTimer2 = SoundManager.Instance.GetLength("Explication_1_second") + 0.2f;
         endAppTimer = SoundManager.Instance.GetLength("Explication_3") + 1f;
         secondExplicationTimer = SoundManager.Instance.GetLength("Explication_2") + 0.1f;
-        numOfEnemiesTalking = 3;
+        numOfEnemiesTalkingFirstRound = 4;
+        numOfEnemiesTalkingSecondRound = 4;
     }
 
 
@@ -56,41 +62,32 @@ public class CinematicsManager : MonoBehaviour
         PlayExplication();
 
         //Audio de enemigos
-
-        //Al finalizar el audio de los enemigos comienza esto:
         if (firstExplicationTimer <= 0 && !initedDragon)
         {
             //Antes de iniciar el dragon, los enemigos deben decir su frase
-            if (numOfEnemiesTalking > 0 && enemyAudioDuration > 0)
+            if (numOfEnemiesTalkingFirstRound > 0)
             {
-                if (enemyAudioDuration > 0)
-                {
-                    enemyAudioDuration -= Time.deltaTime;
-                }
-                else
+                if (enemyAudioDuration <= 0)
                 {
                     enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios();
-                    numOfEnemiesTalking--;
+                    numOfEnemiesTalkingFirstRound--;
                 }
             }
             else if(enemyAudioDuration <= 0) //de esta forma se espera a que el ultimo acabe de hablar para aparecer
             {
-                
+                //Al finalizar el audio de los enemigos comienza esto:
                 InitDragon();
             }
+
+            enemyAudioDuration -= Time.deltaTime;
         }
         else
         {
             firstExplicationTimer -= Time.deltaTime;
         }
 
-        if (cameraPlayer.GetComponent<DragonFollower>().distanceTravelled >= cameraPlayer.GetComponent<DragonFollower>().pathCreator.path.length && gameManager.GetComponent<DragonController>().isOnDragon ==false)
-        {
-            gameManager.GetComponent<DragonController>().isOnDragon = true;
-        }
-
         //si ya ha llegado a su destino y esta en tierra --> activamos la transicion de la camara
-        if (!playerOnDragon && gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().distanceTravelled >= gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().pathCreator.path.length && gameManager?.GetComponent<DragonController>().isLanded == true) 
+        if (!playerOnDragon && gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().distanceTravelled >= gameManager.GetComponent<GameManager>().dragonParent?.GetComponent<DragonFollower>().pathCreator.path.length && gameManager?.GetComponent<DragonController>().isLanded == true)
         {
             if (roarTimer <= 0)
             {
@@ -104,7 +101,51 @@ public class CinematicsManager : MonoBehaviour
             }
         }
 
-        if (enemiesParent.transform.childCount == 0 && gameManager.GetComponent<DragonController>().isLanded == true) //si han muerto todos los enemigos
+
+        //Cuando ya estas encima del dragon
+        if (cameraPlayer.GetComponent<DragonFollower>().distanceTravelled >= cameraPlayer.GetComponent<DragonFollower>().pathCreator.path.length && gameManager.GetComponent<DragonController>().isOnDragon ==false)
+        {
+            if (!isSecondPartPlayed)
+            {
+                explication = Explication.Explication_4;
+            }
+
+            //Antes de decir que estas sobre el dragon (lo cual indicara que puedes disparar) hay que poner la segunda parte del primer audio
+            if (firstExplicationTimer2 <= 0)
+            {
+                gameManager.GetComponent<DragonController>().isOnDragon = true;
+            }
+            else
+            {
+                firstExplicationTimer2 -= Time.deltaTime;
+            }  
+        }
+
+        //Cuando quedan la mitad de enemigos
+        if (enemiesParent.transform.childCount == 4 && gameManager.GetComponent<DragonController>().isLanded == true)
+        {
+            //se activa el audio de los 4 enemigos que faltan y se desactiva el disparo hasta que acaban
+            if (numOfEnemiesTalkingSecondRound > 0)
+            {
+                if (enemyAudioDuration <= 0)
+                {
+                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios();
+                    numOfEnemiesTalkingSecondRound--;
+                    gameManager.GetComponent<DragonController>().isOnDragon = false;
+                }
+            }
+            else if (enemyAudioDuration <= 0) //de esta forma se espera a que el ultimo acabe de hablar para aparecer
+            {
+                //Al finalizar el audio de los enemigos comienza esto:
+                gameManager.GetComponent<DragonController>().isOnDragon = true;
+            }
+
+            enemyAudioDuration -= Time.deltaTime;
+        }
+
+
+        //si han muerto todos los enemigos
+        if (enemiesParent.transform.childCount == 0 && gameManager.GetComponent<DragonController>().isLanded == true) 
         {
             if (!secondExplicationEnd)
             {
@@ -210,6 +251,12 @@ public class CinematicsManager : MonoBehaviour
             explication = Explication.none;
             SoundManager.Instance.Play("Explication_3");
             isEnd = true;
+        }
+        else if (explication == Explication.Explication_4)
+        {
+            explication = Explication.none;
+            SoundManager.Instance.Play("Explication_1_second");
+            isSecondPartPlayed = true;
         }
     }
 }
