@@ -46,10 +46,10 @@ public class CinematicsManager : MonoBehaviour
         isSecondPartPlayed = false;
         takeOffTimer = takeOffDelay;
         explication = Explication.Explication_1;
-        firstExplicationTimer = SoundManager.Instance.GetLength("Explication_1") + 0.2f;
-        firstExplicationTimer2 = SoundManager.Instance.GetLength("Explication_1_second") + 0.2f;
-        endAppTimer = SoundManager.Instance.GetLength("Explication_3") + 1f;
-        secondExplicationTimer = SoundManager.Instance.GetLength("Explication_2") + 0.1f;
+        firstExplicationTimer = SoundManager.Instance.GetLength("Explication_1") + 3f;
+        firstExplicationTimer2 = SoundManager.Instance.GetLength("Explication_1_second") + 3f;
+        endAppTimer = SoundManager.Instance.GetLength("Explication_3") + 3f;
+        secondExplicationTimer = SoundManager.Instance.GetLength("Explication_2") + 3f;
         numOfEnemiesTalkingFirstRound = 4;
         numOfEnemiesTalkingSecondRound = 4;
     }
@@ -69,7 +69,7 @@ public class CinematicsManager : MonoBehaviour
             {
                 if (enemyAudioDuration <= 0)
                 {
-                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios();
+                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios() + 1.5f;
                     numOfEnemiesTalkingFirstRound--;
                 }
             }
@@ -93,7 +93,7 @@ public class CinematicsManager : MonoBehaviour
             {
                 playerOnDragon = true;
                 //gameManager?.GetComponent<GameManager>().SetPlayerOnDragon();
-                cameraPlayer.GetComponent<DragonFollower>().speed = 2f;
+                cameraPlayer.GetComponent<DragonFollower>().speed = 1.2f;
             }
             else
             {
@@ -129,15 +129,15 @@ public class CinematicsManager : MonoBehaviour
             {
                 if (enemyAudioDuration <= 0)
                 {
-                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios();
+                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios() + 1.5f;
                     numOfEnemiesTalkingSecondRound--;
-                    gameManager.GetComponent<DragonController>().isOnDragon = false;
+                    gameManager.GetComponent<DragonController>().isInCinematic = true;
                 }
             }
             else if (enemyAudioDuration <= 0) //de esta forma se espera a que el ultimo acabe de hablar para aparecer
             {
                 //Al finalizar el audio de los enemigos comienza esto:
-                gameManager.GetComponent<DragonController>().isOnDragon = true;
+                gameManager.GetComponent<DragonController>().isInCinematic = false;
             }
 
             enemyAudioDuration -= Time.deltaTime;

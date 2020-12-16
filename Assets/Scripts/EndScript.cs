@@ -20,5 +20,6 @@ public class EndScript : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameManager.GetComponent<CinematicsManager>().explication = Explication.Explication_3;
+        Destroy(this.gameObject);
     }
 }

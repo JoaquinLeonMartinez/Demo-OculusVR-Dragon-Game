@@ -14,6 +14,7 @@ public class DragonController : MonoBehaviour
     float timer;
     bool readyToAttack;
     public bool isOnDragon;
+    public bool isInCinematic;
     public bool dragonMovementActive = false;
     public float movementSpeed = 1f;
 
@@ -25,6 +26,7 @@ public class DragonController : MonoBehaviour
 
     void Start()
     {
+        isInCinematic = false;
         isOnDragon = false;
         readyToAttack = true;
         isLanded = false;
@@ -84,7 +86,7 @@ public class DragonController : MonoBehaviour
         if (rightController.TryGetFeatureValue(CommonUsages.trigger, out float rightTriggerValue) && rightTriggerValue > 0.1)
         {
             //Debug.Log($"Se esta pulsando el trigger derecho, value: {rightTriggerValue}");
-            if (readyToAttack && isOnDragon)
+            if (readyToAttack && isOnDragon && !isInCinematic)
             {
                 ThrowFireAttack();
             }

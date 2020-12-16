@@ -7,7 +7,7 @@ public class DragonFollower : MonoBehaviour
 {
     public PathCreator pathCreator;
     public EndOfPathInstruction endOfPathInstruction;
-    public float speed = 5;
+    public float speed = 4;
     public float distanceTravelled;
     public bool isCamera = false;
 
@@ -64,6 +64,6 @@ public class DragonFollower : MonoBehaviour
 
     public void SetDefaultSpeed()
     {
-        speed = 5;
+        speed = 4;
     }
 }
