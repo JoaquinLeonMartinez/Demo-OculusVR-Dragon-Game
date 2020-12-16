@@ -49,7 +49,7 @@ public class CinematicsManager : MonoBehaviour
         firstExplicationTimer = SoundManager.Instance.GetLength("Explication_1") + 3f;
         firstExplicationTimer2 = SoundManager.Instance.GetLength("Explication_1_second") + 3f;
         endAppTimer = SoundManager.Instance.GetLength("Explication_3") + 3f;
-        secondExplicationTimer = SoundManager.Instance.GetLength("Explication_2") + 3f;
+        secondExplicationTimer = SoundManager.Instance.GetLength("Explication_2") + 2f;
         numOfEnemiesTalkingFirstRound = 4;
         numOfEnemiesTalkingSecondRound = 4;
     }
@@ -176,6 +176,10 @@ public class CinematicsManager : MonoBehaviour
             if (endAppTimer <= 0)
             {
                 Application.Quit(); //en un futuro podemos poner un menu o algo asi
+            }
+            else if (endAppTimer <= 3f)
+            {
+                SoundManager.Instance.SetVolume("Theme", endAppTimer/3);
             }
             else
             {
