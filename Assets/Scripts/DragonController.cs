@@ -75,12 +75,12 @@ public class DragonController : MonoBehaviour
         {
             //Debug.Log("Se esta pulsando el boton principal del mando derecho");
             //cinematicsManager.InitDragon();
-            SoundManager.Instance.Play("Wings");
+            //SoundManager.Instance.Play("Wings");
         }
 
         if (rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool rightSecondaryButtonValue) && rightSecondaryButtonValue)
         {
-            SoundManager.Instance.Play("Steps");
+            //SoundManager.Instance.Play("Steps");
         }
 
         if (rightController.TryGetFeatureValue(CommonUsages.trigger, out float rightTriggerValue) && rightTriggerValue > 0.1)
