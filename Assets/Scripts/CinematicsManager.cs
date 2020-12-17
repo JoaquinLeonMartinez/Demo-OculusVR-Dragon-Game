@@ -37,8 +37,13 @@ public class CinematicsManager : MonoBehaviour
     int numOfEnemiesTalkingFirstRound;
     int numOfEnemiesTalkingSecondRound;
     public float takeOffDelay = 3f;
+    float pauseBeforeEnemy = 3f;
+    float timerBeforeEnemy;
+    float initPause = 5f;
     float takeOffTimer;
-    public Explication explication; //podriamos hacer de esto un entero o un enum para todas las explicaciones que vaya a haber
+    public Explication explication; 
+
+
     void Start()
     {
         isEnd = false;
@@ -52,6 +57,7 @@ public class CinematicsManager : MonoBehaviour
         secondExplicationTimer = SoundManager.Instance.GetLength("Explication_2") + 2f;
         numOfEnemiesTalkingFirstRound = 4;
         numOfEnemiesTalkingSecondRound = 4;
+        timerBeforeEnemy = pauseBeforeEnemy;
     }
 
 
@@ -59,8 +65,15 @@ public class CinematicsManager : MonoBehaviour
     {
 
         //Audio de Irene
-        PlayExplication();
-
+        if (initPause <= 0)
+        {
+            PlayExplication();
+        }
+        else
+        {
+            initPause -= Time.deltaTime;
+        }
+        
         //Audio de enemigos
         if (firstExplicationTimer <= 0 && !initedDragon)
         {
@@ -69,10 +82,18 @@ public class CinematicsManager : MonoBehaviour
             {
                 if (enemyAudioDuration <= 0)
                 {
-                    int randomChildIdx = Random.Range(0, enemiesParent.transform.childCount);
-                    Transform randomChild = enemiesParent.transform.GetChild(randomChildIdx);
-                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios(randomChild.GetComponent<AudioSource>()) + 1.5f;
-                    numOfEnemiesTalkingFirstRound--;
+                    if (timerBeforeEnemy <= 0)
+                    {
+                        timerBeforeEnemy = pauseBeforeEnemy;
+                        int randomChildIdx = Random.Range(0, enemiesParent.transform.childCount);
+                        Transform randomChild = enemiesParent.transform.GetChild(randomChildIdx);
+                        enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios(randomChild.GetComponent<AudioSource>()) + 3f;
+                        numOfEnemiesTalkingFirstRound--;
+                    }
+                    else
+                    {
+                        timerBeforeEnemy -= Time.deltaTime;
+                    }
                 }
             }
             else if(enemyAudioDuration <= 0) //de esta forma se espera a que el ultimo acabe de hablar para aparecer
@@ -122,6 +143,7 @@ public class CinematicsManager : MonoBehaviour
                 firstExplicationTimer2 -= Time.deltaTime;
             }  
         }
+        Debug.Log($"Is cinematic = {gameManager.GetComponent<DragonController>().isInCinematic}");
 
         //Cuando quedan la mitad de enemigos
         if (enemiesParent.transform.childCount == 4 && gameManager.GetComponent<DragonController>().isLanded == true)
@@ -131,11 +153,19 @@ public class CinematicsManager : MonoBehaviour
             {
                 if (enemyAudioDuration <= 0)
                 {
-                    int randomChildIdx = Random.Range(0, enemiesParent.transform.childCount);
-                    Transform randomChild = enemiesParent.transform.GetChild(randomChildIdx);
-                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios(randomChild.GetComponent<AudioSource>()) + 1.5f;
-                    numOfEnemiesTalkingSecondRound--;
                     gameManager.GetComponent<DragonController>().isInCinematic = true;
+                    if (timerBeforeEnemy <= 0)
+                    {
+                        timerBeforeEnemy = pauseBeforeEnemy;
+                        int randomChildIdx = Random.Range(0, enemiesParent.transform.childCount);
+                        Transform randomChild = enemiesParent.transform.GetChild(randomChildIdx);
+                        enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios(randomChild.GetComponent<AudioSource>()) + 3f;
+                        numOfEnemiesTalkingSecondRound--;
+                    }
+                    else
+                    {
+                        timerBeforeEnemy -= Time.deltaTime;
+                    }   
                 }
             }
             else if (enemyAudioDuration <= 0) //de esta forma se espera a que el ultimo acabe de hablar para aparecer
@@ -143,10 +173,9 @@ public class CinematicsManager : MonoBehaviour
                 //Al finalizar el audio de los enemigos comienza esto:
                 gameManager.GetComponent<DragonController>().isInCinematic = false;
             }
-
+            
             enemyAudioDuration -= Time.deltaTime;
         }
-
 
         //si han muerto todos los enemigos
         if (enemiesParent.transform.childCount == 0 && gameManager.GetComponent<DragonController>().isLanded == true) 
@@ -180,10 +209,6 @@ public class CinematicsManager : MonoBehaviour
             if (endAppTimer <= 0)
             {
                 Application.Quit(); //en un futuro podemos poner un menu o algo asi
-            }
-            else if (endAppTimer <= 3f)
-            {
-                SoundManager.Instance.SetVolume("Theme", endAppTimer/3);
             }
             else
             {
