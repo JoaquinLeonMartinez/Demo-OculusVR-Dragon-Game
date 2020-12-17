@@ -31,6 +31,8 @@ public class AnimTrigger : MonoBehaviour
                 if (animation == "StartLanding")
                 {
                     dragonManager.SetLanded(true);
+
+                    StartCoroutine(WaitSeconds(0.5f));
                     SoundManager.Instance.footSteps.isRunning = true;
                 }
                 else if (animation == "IdleActive")//Significa que esta a punto de rugir y quedarse en idle
@@ -56,6 +58,11 @@ public class AnimTrigger : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+    }
+
+    IEnumerator WaitSeconds(float pause)
+    {
+        yield return new WaitForSeconds(pause);
     }
 }
 

@@ -69,7 +69,9 @@ public class CinematicsManager : MonoBehaviour
             {
                 if (enemyAudioDuration <= 0)
                 {
-                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios() + 1.5f;
+                    int randomChildIdx = Random.Range(0, enemiesParent.transform.childCount);
+                    Transform randomChild = enemiesParent.transform.GetChild(randomChildIdx);
+                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios(randomChild.GetComponent<AudioSource>()) + 1.5f;
                     numOfEnemiesTalkingFirstRound--;
                 }
             }
@@ -129,7 +131,9 @@ public class CinematicsManager : MonoBehaviour
             {
                 if (enemyAudioDuration <= 0)
                 {
-                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios() + 1.5f;
+                    int randomChildIdx = Random.Range(0, enemiesParent.transform.childCount);
+                    Transform randomChild = enemiesParent.transform.GetChild(randomChildIdx);
+                    enemyAudioDuration = SoundManager.Instance.InvokeEnemiesAudios(randomChild.GetComponent<AudioSource>()) + 1.5f;
                     numOfEnemiesTalkingSecondRound--;
                     gameManager.GetComponent<DragonController>().isInCinematic = true;
                 }

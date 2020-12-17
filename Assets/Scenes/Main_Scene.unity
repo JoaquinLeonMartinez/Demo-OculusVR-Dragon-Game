@@ -684,6 +684,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   footSteps: {fileID: 1328023169188339}
+  enemiesAudioSources: []
   enemiesAudio:
   - {fileID: 8300000, guid: a35ced211e9ea9e4293f99f0cbe4d072, type: 3}
   - {fileID: 8300000, guid: 70dc1472760445349ab25e6f4f0095fe, type: 3}
@@ -1272,7 +1273,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9057214988742935493, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}
       propertyPath: MaxDistance
-      value: 500
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 386de2b290fd5814daee4ff44f0e5246, type: 3}

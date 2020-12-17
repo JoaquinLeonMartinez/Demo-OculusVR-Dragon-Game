@@ -12,7 +12,7 @@ public class SoundManager : MonoBehaviour
 
     public FootSteps footSteps;
 
-    //public List<AudioSource> enemiesAudioOld;
+    public List<AudioSource> enemiesAudioSources;
 
     public List<AudioClip> enemiesAudio;
 
@@ -67,7 +67,17 @@ public class SoundManager : MonoBehaviour
         return 0;
     }
     */
-    public float InvokeEnemiesAudios()
+
+    public void UpdateEnemiesAudioSources()
+    {
+        for (int i = 0; i <= enemiesAudioSources.Count; i++)
+        {
+
+        }
+
+    }
+
+    public float InvokeEnemiesAudios(AudioSource enemyAudioSource)
     {
         if (enemiesAudio != null)
         {
@@ -75,10 +85,10 @@ public class SoundManager : MonoBehaviour
             if (enemiesAudio[randomNumb] != null)
             {
                 //Debug.Log($"Vamos a reproducir el audio {enemiesAudio[randomNumb]}");
-                audioSource.clip = enemiesAudio[randomNumb];
-                audioSource.Play();
+                enemyAudioSource.clip = enemiesAudio[randomNumb];
+                enemyAudioSource.Play();
                 //Debug.Log($"Ya se esta reproduciendo el audio {audioSource.clip.name}");
-                float duration = audioSource.clip.length;
+                float duration = enemyAudioSource.clip.length;
                 enemiesAudio.RemoveAt(randomNumb); //asi no se repetiran audios
                 return duration;
             }
